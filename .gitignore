@@ -65,6 +65,10 @@ coverage/
 # Misc
 *.bak
 *.backup
+
+# Docker
+mysql_data/
+*.dockerignore
 *.old
 
 # Made with Bob
