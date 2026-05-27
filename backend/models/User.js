@@ -61,20 +61,20 @@ module.exports = (sequelize) => {
                     user.password = await bcrypt.hash(user.password, salt);
                 }
             }
+        },
+        instanceMethods: {
+            // Instance method to compare password
+            comparePassword: async function(candidatePassword) {
+                return await bcrypt.compare(candidatePassword, this.password);
+            },
+            // Instance method to get user without password
+            toJSON: function() {
+                const values = Object.assign({}, this.get());
+                delete values.password;
+                return values;
+            }
         }
     });
-
-    // Instance method to compare password
-    User.prototype.comparePassword = async function(candidatePassword) {
-        return await bcrypt.compare(candidatePassword, this.password);
-    };
-
-    // Instance method to get user without password
-    User.prototype.toJSON = function() {
-        const values = Object.assign({}, this.get());
-        delete values.password;
-        return values;
-    };
 
     return User;
 };
