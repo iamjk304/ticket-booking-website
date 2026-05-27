@@ -79,18 +79,18 @@ async function performSearch(params) {
 
 // Transform backend data to frontend format
 function transformTripData(trip, params) {
-    const isFligh = params.type === 'flight';
+    const isFlight = params.type === 'flight';
     return {
-        id: isFligh ? `FL${trip.id}` : `TR${trip.id}`,
+        id: isFlight ? `FL${trip.id}` : `TR${trip.id}`,
         type: params.type,
-        name: isFligh ? trip.airline : trip.train_name,
-        number: isFligh ? trip.flight_number : trip.train_number,
+        name: isFlight ? trip.airline : trip.train_name,
+        number: isFlight ? trip.flight_number : trip.train_number,
         origin: trip.from_city,
         originCode: trip.from_city.substring(0, 3).toUpperCase(),
         destination: trip.to_city,
         destinationCode: trip.to_city.substring(0, 3).toUpperCase(),
-        departure: trip.departure_time,
-        arrival: trip.arrival_time,
+        departure: convertTo24Hour(trip.departure_time),
+        arrival: convertTo24Hour(trip.arrival_time),
         duration: trip.duration,
         stops: trip.stops === 0 ? 'nonstop' : trip.stops === 1 ? 'onestop' : 'twostop',
         class: params.class,
@@ -98,6 +98,32 @@ function transformTripData(trip, params) {
         availableSeats: 50, // Default value, can be updated if backend provides this
         date: params.departDate
     };
+}
+
+// Convert time to 24-hour format
+function convertTo24Hour(time) {
+    // If already in 24-hour format (HH:MM), return as is
+    if (/^\d{2}:\d{2}$/.test(time)) {
+        return time;
+    }
+    
+    // If in 12-hour format with AM/PM
+    const match = time.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if (match) {
+        let hours = parseInt(match[1]);
+        const minutes = match[2];
+        const period = match[3].toUpperCase();
+        
+        if (period === 'PM' && hours !== 12) {
+            hours += 12;
+        } else if (period === 'AM' && hours === 12) {
+            hours = 0;
+        }
+        
+        return `${hours.toString().padStart(2, '0')}:${minutes}`;
+    }
+    
+    return time; // Return original if format not recognized
 }
 
 function displayResults(results) {
@@ -294,9 +320,11 @@ function formatDate(dateString) {
 }
 
 function formatCurrency(amount) {
-    return new Intl.NumberFormat('en-US', {
+    return new Intl.NumberFormat('en-IN', {
         style: 'currency',
-        currency: 'USD'
+        currency: 'INR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
     }).format(amount);
 }
 
