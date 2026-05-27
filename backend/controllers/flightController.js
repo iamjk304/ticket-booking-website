@@ -41,27 +41,27 @@ exports.searchFlights = async (req, res) => {
     try {
         const { from, to, date, minPrice, maxPrice, stops, sortBy } = req.query;
 
-        // Build where clause
+        // Build where clause for Sequelize v3
         const whereClause = {
             is_active: true
         };
 
         if (from) {
             whereClause.from_city = {
-                [Op.like]: `%${from}%`
+                $like: `%${from}%`
             };
         }
 
         if (to) {
             whereClause.to_city = {
-                [Op.like]: `%${to}%`
+                $like: `%${to}%`
             };
         }
 
         if (minPrice || maxPrice) {
             whereClause.price = {};
-            if (minPrice) whereClause.price[Op.gte] = parseFloat(minPrice);
-            if (maxPrice) whereClause.price[Op.lte] = parseFloat(maxPrice);
+            if (minPrice) whereClause.price.$gte = parseFloat(minPrice);
+            if (maxPrice) whereClause.price.$lte = parseFloat(maxPrice);
         }
 
         if (stops !== undefined) {
