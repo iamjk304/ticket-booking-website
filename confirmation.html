@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmed - TravelEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>✈️ TravelEase</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Booking Progress -->
+    <section class="booking-progress">
+        <div class="container">
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <div class="step-label">Trip Details</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <div class="step-label">Passenger Info</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmation Section -->
+    <section class="confirmation-section">
+        <div class="container">
+            <div class="confirmation-card">
+                <div class="success-icon">✅</div>
+                <h1>Booking Confirmed!</h1>
+                <p class="confirmation-message">Your ticket has been booked successfully</p>
+                <div class="booking-id">
+                    <strong>Booking ID:</strong> <span id="bookingId">Loading...</span>
+                </div>
+            </div>
+
+            <div class="ticket-container">
+                <div id="ticket" class="ticket">
+                    <div class="ticket-header">
+                        <div class="ticket-logo">
+                            <h2>✈️ TravelEase</h2>
+                        </div>
+                        <div class="ticket-type" id="ticketType">E-TICKET</div>
+                    </div>
+
+                    <div class="ticket-body">
+                        <div class="ticket-section">
+                            <h3>Journey Details</h3>
+                            <div class="journey-info">
+                                <div class="journey-point">
+                                    <div class="location" id="originCity">---</div>
+                                    <div class="time" id="departureTime">--:--</div>
+                                    <div class="date" id="departureDate">---</div>
+                                </div>
+                                <div class="journey-arrow">
+                                    <div class="arrow-line"></div>
+                                    <div class="arrow-head">→</div>
+                                    <div class="duration" id="duration">---</div>
+                                </div>
+                                <div class="journey-point">
+                                    <div class="location" id="destCity">---</div>
+                                    <div class="time" id="arrivalTime">--:--</div>
+                                    <div class="date" id="arrivalDate">---</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ticket-section">
+                            <h3>Trip Information</h3>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Service</span>
+                                    <span class="info-value" id="serviceName">---</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Service Number</span>
+                                    <span class="info-value" id="serviceNumber">---</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Class</span>
+                                    <span class="info-value" id="travelClass">---</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Seats</span>
+                                    <span class="info-value" id="seatNumbers">---</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ticket-section">
+                            <h3>Passenger Details</h3>
+                            <div id="passengerList" class="passenger-list">
+                                <!-- Passengers will be listed here -->
+                            </div>
+                        </div>
+
+                        <div class="ticket-section">
+                            <h3>Payment Summary</h3>
+                            <div class="payment-summary">
+                                <div class="summary-row">
+                                    <span>Total Amount Paid</span>
+                                    <span class="amount" id="amountPaid">$0.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Payment Method</span>
+                                    <span id="paymentMethod">---</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Transaction Date</span>
+                                    <span id="transactionDate">---</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ticket-barcode">
+                            <div class="barcode-lines">
+                                <div class="barcode-line"></div>
+                                <div class="barcode-line"></div>
+                                <div class="barcode-line"></div>
+                                <div class="barcode-line"></div>
+                                <div class="barcode-line"></div>
+                                <div class="barcode-line"></div>
+                                <div class="barcode-line"></div>
+                                <div class="barcode-line"></div>
+                            </div>
+                            <div class="barcode-number" id="barcodeNumber">---</div>
+                        </div>
+                    </div>
+
+                    <div class="ticket-footer">
+                        <p><strong>Important:</strong> Please carry a valid ID proof while traveling. Arrive at least 2 hours before departure for flights and 30 minutes for trains.</p>
+                    </div>
+                </div>
+
+                <div class="ticket-actions">
+                    <button onclick="printTicket()" class="btn btn-primary">
+                        <span>🖨️</span> Print Ticket
+                    </button>
+                    <button onclick="downloadTicket()" class="btn btn-secondary">
+                        <span>📥</span> Download PDF
+                    </button>
+                    <button onclick="emailTicket()" class="btn btn-secondary">
+                        <span>📧</span> Email Ticket
+                    </button>
+                </div>
+            </div>
+
+            <div class="next-steps">
+                <h3>What's Next?</h3>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-icon">📧</div>
+                        <h4>Check Your Email</h4>
+                        <p>A confirmation email has been sent to your registered email address</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">📱</div>
+                        <h4>Save Your Ticket</h4>
+                        <p>Download or print your ticket for easy access during travel</p>
+                    </div>
+                    <div class="step-card">
+                        <div class="step-icon">🎫</div>
+                        <h4>Prepare for Travel</h4>
+                        <p>Arrive early and carry valid identification documents</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button onclick="window.location.href='index.html'" class="btn btn-primary btn-large">
+                    Book Another Trip
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TravelEase</h3>
+                    <p>Your trusted travel booking partner</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@travelease.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TravelEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script>
+        // Load booking confirmation
+        window.addEventListener('DOMContentLoaded', function() {
+            const bookingData = JSON.parse(localStorage.getItem('currentBooking') || '{}');
+            
+            if (!bookingData.bookingId) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const trip = bookingData.trip;
+            const passengers = bookingData.passengers || [];
+            const seats = bookingData.seats || [];
+
+            // Display booking ID
+            document.getElementById('bookingId').textContent = bookingData.bookingId;
+            document.getElementById('barcodeNumber').textContent = bookingData.bookingId;
+
+            // Display journey details
+            document.getElementById('originCity').textContent = trip.origin;
+            document.getElementById('destCity').textContent = trip.destination;
+            document.getElementById('departureTime').textContent = trip.departure;
+            document.getElementById('arrivalTime').textContent = trip.arrival;
+            document.getElementById('departureDate').textContent = trip.date;
+            document.getElementById('arrivalDate').textContent = trip.date;
+            document.getElementById('duration').textContent = trip.duration;
+
+            // Display trip information
+            document.getElementById('ticketType').textContent = trip.type === 'flight' ? 'FLIGHT TICKET' : 'TRAIN TICKET';
+            document.getElementById('serviceName').textContent = trip.name;
+            document.getElementById('serviceNumber').textContent = trip.number;
+            document.getElementById('travelClass').textContent = trip.class.charAt(0).toUpperCase() + trip.class.slice(1);
+            document.getElementById('seatNumbers').textContent = seats.join(', ');
+
+            // Display passengers
+            const passengerListHTML = passengers.map((p, i) => `
+                <div class="passenger-item">
+                    <span class="passenger-number">Passenger ${i + 1}</span>
+                    <span class="passenger-name">${p.firstName} ${p.lastName}</span>
+                    <span class="passenger-age">Age: ${p.age}</span>
+                </div>
+            `).join('');
+            document.getElementById('passengerList').innerHTML = passengerListHTML;
+
+            // Display payment information
+            const basePrice = parseFloat(trip.price) * passengers.length;
+            const taxes = basePrice * 0.15;
+            const service = 25;
+            const total = basePrice + taxes + service;
+
+            document.getElementById('amountPaid').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('paymentMethod').textContent = bookingData.paymentMethod.charAt(0).toUpperCase() + bookingData.paymentMethod.slice(1);
+            document.getElementById('transactionDate').textContent = new Date(bookingData.bookingDate).toLocaleString();
+
+            // Save to booking history
+            let bookingHistory = JSON.parse(localStorage.getItem('bookingHistory') || '[]');
+            bookingHistory.push(bookingData);
+            localStorage.setItem('bookingHistory', JSON.stringify(bookingHistory));
+        });
+
+        function printTicket() {
+            window.print();
+        }
+
+        function downloadTicket() {
+            alert('Download functionality would generate a PDF ticket. This is a demo version.');
+        }
+
+        function emailTicket() {
+            const bookingData = JSON.parse(localStorage.getItem('currentBooking') || '{}');
+            const email = bookingData.contactEmail || 'your-email@example.com';
+            alert(`Ticket will be sent to: ${email}\n\nThis is a demo version.`);
+        }
+    </script>
+</body>
+</html>

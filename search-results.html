@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - TravelEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>✈️ TravelEase</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Search Summary -->
+    <section class="search-summary">
+        <div class="container">
+            <div class="summary-card">
+                <div class="summary-info">
+                    <h2 id="searchTitle">Available Trips</h2>
+                    <p id="searchDetails" class="search-details"></p>
+                </div>
+                <button onclick="window.location.href='index.html'" class="btn btn-secondary">
+                    Modify Search
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section">
+        <div class="container">
+            <div class="results-layout">
+                <!-- Filters Sidebar -->
+                <aside class="filters-sidebar">
+                    <h3>Filter Results</h3>
+                    
+                    <div class="filter-group">
+                        <h4>Price Range</h4>
+                        <div class="price-filter">
+                            <input type="range" id="priceRange" min="0" max="1000" value="1000" step="50">
+                            <div class="price-labels">
+                                <span>$0</span>
+                                <span id="maxPrice">$1000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Departure Time</h4>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="morning" class="time-filter">
+                            <span>Morning (6AM - 12PM)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="afternoon" class="time-filter">
+                            <span>Afternoon (12PM - 6PM)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="evening" class="time-filter">
+                            <span>Evening (6PM - 12AM)</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="night" class="time-filter">
+                            <span>Night (12AM - 6AM)</span>
+                        </label>
+                    </div>
+
+                    <div class="filter-group">
+                        <h4>Stops</h4>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="nonstop" class="stops-filter">
+                            <span>Non-stop</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="onestop" class="stops-filter">
+                            <span>1 Stop</span>
+                        </label>
+                        <label class="filter-checkbox">
+                            <input type="checkbox" value="twostop" class="stops-filter">
+                            <span>2+ Stops</span>
+                        </label>
+                    </div>
+
+                    <button class="btn btn-secondary btn-block" onclick="resetFilters()">
+                        Reset Filters
+                    </button>
+                </aside>
+
+                <!-- Results List -->
+                <div class="results-main">
+                    <div class="results-header">
+                        <p id="resultsCount">Loading results...</p>
+                        <select id="sortBy" class="sort-select">
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="duration">Duration</option>
+                            <option value="departure">Departure Time</option>
+                        </select>
+                    </div>
+
+                    <div id="resultsContainer" class="results-list">
+                        <!-- Results will be dynamically loaded here -->
+                    </div>
+
+                    <div id="noResults" class="no-results" style="display: none;">
+                        <div class="no-results-icon">😔</div>
+                        <h3>No trips found</h3>
+                        <p>Try adjusting your filters or search criteria</p>
+                        <button onclick="window.location.href='index.html'" class="btn btn-primary">
+                            New Search
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TravelEase</h3>
+                    <p>Your trusted travel booking partner</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@travelease.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TravelEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TravelEase - Book Your Journey</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>✈️ TravelEase</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-overlay">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">Your Journey Starts Here</h1>
+                    <p class="hero-subtitle">Book flights and trains to destinations worldwide</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-card">
+                <div class="search-tabs">
+                    <button class="tab-btn active" data-type="flight">
+                        <span>✈️</span> Flights
+                    </button>
+                    <button class="tab-btn" data-type="train">
+                        <span>🚄</span> Trains
+                    </button>
+                </div>
+
+                <form id="searchForm" class="search-form">
+                    <input type="hidden" id="travelType" value="flight">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="origin">From</label>
+                            <input type="text" id="origin" name="origin" placeholder="Enter origin city" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="destination">To</label>
+                            <input type="text" id="destination" name="destination" placeholder="Enter destination city" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="departDate">Departure Date</label>
+                            <input type="date" id="departDate" name="departDate" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="passengers">Passengers</label>
+                            <select id="passengers" name="passengers" required>
+                                <option value="1">1 Passenger</option>
+                                <option value="2">2 Passengers</option>
+                                <option value="3">3 Passengers</option>
+                                <option value="4">4 Passengers</option>
+                                <option value="5">5 Passengers</option>
+                                <option value="6">6+ Passengers</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="class">Class</label>
+                            <select id="class" name="class" required>
+                                <option value="economy">Economy</option>
+                                <option value="business">Business</option>
+                                <option value="first">First Class</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="returnTrip" name="returnTrip">
+                                <span>Round Trip</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group return-date-group" style="display: none;">
+                            <label for="returnDate">Return Date</label>
+                            <input type="date" id="returnDate" name="returnDate">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-search">
+                        <span>🔍</span> Search Tickets
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose TravelEase?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>Compare and find the best deals on flights and trains</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Booking</h3>
+                    <p>Quick and easy booking process in just a few clicks</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Secure Payment</h3>
+                    <p>Your transactions are safe and encrypted</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>Mobile Friendly</h3>
+                    <p>Book on the go with our responsive design</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TravelEase</h3>
+                    <p>Your trusted travel booking partner</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@travelease.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TravelEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - TravelEase</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>✈️ TravelEase</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Booking Progress -->
+    <section class="booking-progress">
+        <div class="container">
+            <div class="progress-steps">
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <div class="step-label">Trip Details</div>
+                </div>
+                <div class="step completed">
+                    <div class="step-number">✓</div>
+                    <div class="step-label">Passenger Info</div>
+                </div>
+                <div class="step active">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section class="payment-section">
+        <div class="container">
+            <div class="payment-layout">
+                <!-- Payment Form -->
+                <div class="payment-main">
+                    <div class="payment-card">
+                        <h2>Payment Method</h2>
+                        
+                        <div class="payment-methods">
+                            <label class="payment-method-option">
+                                <input type="radio" name="paymentMethod" value="card" checked>
+                                <div class="method-content">
+                                    <span class="method-icon">💳</span>
+                                    <span class="method-name">Credit/Debit Card</span>
+                                </div>
+                            </label>
+                            <label class="payment-method-option">
+                                <input type="radio" name="paymentMethod" value="paypal">
+                                <div class="method-content">
+                                    <span class="method-icon">🅿️</span>
+                                    <span class="method-name">PayPal</span>
+                                </div>
+                            </label>
+                            <label class="payment-method-option">
+                                <input type="radio" name="paymentMethod" value="wallet">
+                                <div class="method-content">
+                                    <span class="method-icon">👛</span>
+                                    <span class="method-name">Digital Wallet</span>
+                                </div>
+                            </label>
+                        </div>
+
+                        <form id="paymentForm" class="payment-form">
+                            <div id="cardPayment" class="payment-details">
+                                <h3>Card Details</h3>
+                                
+                                <div class="form-group">
+                                    <label for="cardNumber">Card Number *</label>
+                                    <input type="text" id="cardNumber" name="cardNumber" 
+                                           placeholder="1234 5678 9012 3456" 
+                                           maxlength="19" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cardName">Cardholder Name *</label>
+                                    <input type="text" id="cardName" name="cardName" 
+                                           placeholder="John Doe" required>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="expiryDate">Expiry Date *</label>
+                                        <input type="text" id="expiryDate" name="expiryDate" 
+                                               placeholder="MM/YY" maxlength="5" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="cvv">CVV *</label>
+                                        <input type="text" id="cvv" name="cvv" 
+                                               placeholder="123" maxlength="4" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group checkbox-group">
+                                    <label>
+                                        <input type="checkbox" id="saveCard" name="saveCard">
+                                        <span>Save card for future bookings</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div id="paypalPayment" class="payment-details" style="display: none;">
+                                <div class="payment-info">
+                                    <p>You will be redirected to PayPal to complete your payment securely.</p>
+                                    <button type="button" class="btn btn-paypal">
+                                        Continue with PayPal
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div id="walletPayment" class="payment-details" style="display: none;">
+                                <div class="payment-info">
+                                    <p>Select your preferred digital wallet:</p>
+                                    <div class="wallet-options">
+                                        <button type="button" class="btn btn-wallet">Apple Pay</button>
+                                        <button type="button" class="btn btn-wallet">Google Pay</button>
+                                        <button type="button" class="btn btn-wallet">Samsung Pay</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="billing-address">
+                                <h3>Billing Address</h3>
+                                <div class="form-group">
+                                    <label for="address">Street Address *</label>
+                                    <input type="text" id="address" name="address" required>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="city">City *</label>
+                                        <input type="text" id="city" name="city" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="state">State/Province *</label>
+                                        <input type="text" id="state" name="state" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="zipCode">ZIP/Postal Code *</label>
+                                        <input type="text" id="zipCode" name="zipCode" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country *</label>
+                                        <select id="country" name="country" required>
+                                            <option value="">Select Country</option>
+                                            <option value="US">United States</option>
+                                            <option value="CA">Canada</option>
+                                            <option value="UK">United Kingdom</option>
+                                            <option value="AU">Australia</option>
+                                            <option value="IN">India</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="terms-agreement">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="agreeTerms" required>
+                                    <span>I agree to the <a href="#terms">Terms & Conditions</a> and <a href="#privacy">Privacy Policy</a></span>
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" onclick="window.history.back()" class="btn btn-secondary">
+                                    Back
+                                </button>
+                                <button type="submit" class="btn btn-primary btn-pay">
+                                    <span>🔒</span> Pay Now
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="security-info">
+                        <div class="security-badge">
+                            <span>🔒</span>
+                            <div>
+                                <strong>Secure Payment</strong>
+                                <p>Your payment information is encrypted and secure</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Summary Sidebar -->
+                <aside class="payment-sidebar">
+                    <div class="summary-card sticky">
+                        <h3>Order Summary</h3>
+                        <div id="orderSummary" class="order-summary-details">
+                            <!-- Summary will be loaded here -->
+                        </div>
+                        <div class="price-breakdown">
+                            <div class="price-row">
+                                <span>Subtotal</span>
+                                <span id="subtotal">$0.00</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Taxes & Fees</span>
+                                <span id="taxes">$0.00</span>
+                            </div>
+                            <div class="price-row">
+                                <span>Service Charge</span>
+                                <span id="serviceCharge">$0.00</span>
+                            </div>
+                            <div class="price-row total">
+                                <span>Total to Pay</span>
+                                <span id="totalPay">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TravelEase</h3>
+                    <p>Your trusted travel booking partner</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#terms">Terms & Conditions</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: support@travelease.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TravelEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script>
+        // Payment method switching
+        document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.querySelectorAll('.payment-details').forEach(detail => {
+                    detail.style.display = 'none';
+                });
+                
+                if (this.value === 'card') {
+                    document.getElementById('cardPayment').style.display = 'block';
+                } else if (this.value === 'paypal') {
+                    document.getElementById('paypalPayment').style.display = 'block';
+                } else if (this.value === 'wallet') {
+                    document.getElementById('walletPayment').style.display = 'block';
+                }
+            });
+        });
+
+        // Load order summary
+        window.addEventListener('DOMContentLoaded', function() {
+            const bookingData = JSON.parse(localStorage.getItem('currentBooking') || '{}');
+            
+            if (bookingData.trip) {
+                const trip = bookingData.trip;
+                const passengers = bookingData.passengers || [];
+                const seats = bookingData.seats || [];
+                
+                const summaryHTML = `
+                    <div class="summary-item">
+                        <strong>${trip.type === 'flight' ? '✈️' : '🚄'} ${trip.name}</strong>
+                        <p>${trip.origin} → ${trip.destination}</p>
+                        <p>${trip.date} at ${trip.departure}</p>
+                    </div>
+                    <div class="summary-item">
+                        <strong>Passengers:</strong> ${passengers.length}
+                        <p>Seats: ${seats.join(', ')}</p>
+                    </div>
+                `;
+                
+                document.getElementById('orderSummary').innerHTML = summaryHTML;
+                
+                const basePrice = parseFloat(trip.price) * passengers.length;
+                const taxes = basePrice * 0.15;
+                const service = 25;
+                const total = basePrice + taxes + service;
+                
+                document.getElementById('subtotal').textContent = `$${basePrice.toFixed(2)}`;
+                document.getElementById('taxes').textContent = `$${taxes.toFixed(2)}`;
+                document.getElementById('serviceCharge').textContent = `$${service.toFixed(2)}`;
+                document.getElementById('totalPay').textContent = `$${total.toFixed(2)}`;
+            }
+        });
+
+        // Payment form submission
+        document.getElementById('paymentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const bookingData = JSON.parse(localStorage.getItem('currentBooking') || '{}');
+            bookingData.paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+            bookingData.bookingId = 'TRV' + Date.now();
+            bookingData.bookingDate = new Date().toISOString();
+            
+            localStorage.setItem('currentBooking', JSON.stringify(bookingData));
+            
+            // Simulate payment processing
+            const btn = document.querySelector('.btn-pay');
+            btn.disabled = true;
+            btn.innerHTML = '<span>⏳</span> Processing...';
+            
+            setTimeout(() => {
+                window.location.href = 'confirmation.html';
+            }, 2000);
+        });
+
+        // Card number formatting
+        document.getElementById('cardNumber').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+            e.target.value = formattedValue;
+        });
+
+        // Expiry date formatting
+        document.getElementById('expiryDate').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0, 2) + '/' + value.slice(2, 4);
+            }
+            e.target.value = value;
+        });
+
+        // CVV validation
+        document.getElementById('cvv').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    </script>
+</body>
+</html>
