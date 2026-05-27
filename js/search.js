@@ -46,13 +46,24 @@ function displaySearchSummary(params) {
     details.textContent = `${typeIcon} ${params.origin} → ${params.destination} | ${dateStr}${returnStr} | ${params.passengers} Passenger(s) | ${params.class.charAt(0).toUpperCase() + params.class.slice(1)} Class`;
 }
 
-function performSearch(params) {
+async function performSearch(params) {
     const resultsContainer = document.getElementById('resultsContainer');
     showLoading(resultsContainer);
 
-    // Simulate API delay
-    setTimeout(() => {
-        currentResults = searchTrips(params);
+    try {
+        // Fetch data from backend API
+        const endpoint = params.type === 'flight' ? '/api/flights/search' : '/api/trains/search';
+        const response = await fetch(`http://localhost:5000${endpoint}?from=${encodeURIComponent(params.origin)}&to=${encodeURIComponent(params.destination)}&date=${params.departDate}&class=${params.class}`);
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch trips');
+        }
+        
+        const data = await response.json();
+        currentResults = data.data || [];
+        
+        // Transform backend data to match frontend format
+        currentResults = currentResults.map(trip => transformTripData(trip, params));
         filteredResults = [...currentResults];
         
         if (currentResults.length === 0) {
@@ -60,7 +71,33 @@ function performSearch(params) {
         } else {
             displayResults(filteredResults);
         }
-    }, 500);
+    } catch (error) {
+        console.error('Error fetching trips:', error);
+        showError('Failed to load trips. Please try again.');
+    }
+}
+
+// Transform backend data to frontend format
+function transformTripData(trip, params) {
+    const isFligh = params.type === 'flight';
+    return {
+        id: isFligh ? `FL${trip.id}` : `TR${trip.id}`,
+        type: params.type,
+        name: isFligh ? trip.airline : trip.train_name,
+        number: isFligh ? trip.flight_number : trip.train_number,
+        origin: trip.from_city,
+        originCode: trip.from_city.substring(0, 3).toUpperCase(),
+        destination: trip.to_city,
+        destinationCode: trip.to_city.substring(0, 3).toUpperCase(),
+        departure: trip.departure_time,
+        arrival: trip.arrival_time,
+        duration: trip.duration,
+        stops: trip.stops === 0 ? 'nonstop' : trip.stops === 1 ? 'onestop' : 'twostop',
+        class: params.class,
+        price: parseFloat(trip.price),
+        availableSeats: 50, // Default value, can be updated if backend provides this
+        date: params.departDate
+    };
 }
 
 function displayResults(results) {
@@ -265,6 +302,20 @@ function formatCurrency(amount) {
 
 function showLoading(element) {
     element.innerHTML = '<div class="loading-spinner">⏳ Searching for trips...</div>';
+}
+
+function showError(message) {
+    const resultsContainer = document.getElementById('resultsContainer');
+    const resultsCount = document.getElementById('resultsCount');
+    
+    resultsContainer.innerHTML = `
+        <div style="text-align: center; padding: 3rem; color: #e74c3c;">
+            <h3>⚠️ Error</h3>
+            <p>${message}</p>
+            <button class="btn btn-primary" onclick="location.reload()">Try Again</button>
+        </div>
+    `;
+    resultsCount.textContent = 'Error loading results';
 }
 
 // Made with Bob
