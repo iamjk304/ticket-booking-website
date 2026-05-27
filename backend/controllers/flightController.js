@@ -2,8 +2,12 @@
 // Flight Controller
 // ===================================
 
-const { Flight } = require('../config/database');
-const { Op } = require('sequelize');
+const { Flight, Sequelize } = require('../config/database');
+const Op = Sequelize.Op || {
+    like: '$like$',
+    gte: '$gte$',
+    lte: '$lte$'
+};
 
 // @desc    Get all flights
 // @route   GET /api/flights

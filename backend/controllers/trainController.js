@@ -2,8 +2,12 @@
 // Train Controller
 // ===================================
 
-const { Train } = require('../config/database');
-const { Op } = require('sequelize');
+const { Train, Sequelize } = require('../config/database');
+const Op = Sequelize.Op || {
+    like: '$like$',
+    gte: '$gte$',
+    lte: '$lte$'
+};
 
 // @desc    Get all trains
 // @route   GET /api/trains
